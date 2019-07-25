@@ -1,0 +1,36 @@
+html, body, #app {   /**   默认的背景样式等   */
+	font-family: Helvetica Neue,Helvetica,Roboto,Segoe UI,Arial,sans-serif;
+	/* font-size: 50px;  */
+	background: #f0f0f0!important;   /**   f0f0f0  */
+	width: 100%;
+	overflow-x: hidden;
+}
+
+body,html,div,dl,dt,dd,form,h1,h2,h3,h4,h5,h6,img,ol,ul,li,table,th,td,p,span,b,i {
+	margin: 0;
+	padding: 0;
+}
+
+i,b {
+	font-style: normal;
+}
+
+ul,li,ol,dl,dd,dt {
+	list-style: none;
+	padding: 0;
+	margin:0;
+}
+.am-flexbox-item{
+	display: none !important;
+}
+.am-flexbox-item::after{
+	display: none !important;
+}
+img {
+	border: none;
+}
+
+input,button{
+	outline: none;
+	border: none;
+}

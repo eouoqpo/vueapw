@@ -1,0 +1,33 @@
+.focusCont{
+    margin:.2rem .0rem 1.4rem;
+    .content{
+        padding: .450rem .0rem .45rem .5rem;
+        border-bottom:.04rem solid #f0f0f0;
+        img{
+            width: 2.8rem;
+            height: 2.8rem;
+        }
+        .orderInfo{
+            margin:.2rem 0rem 0rem .5rem;                        
+            h4{
+                height: .8rem;
+                padding-top:.1rem;
+                width:5.9rem;
+                font-size: .4rem;
+                white-space:nowrap;
+                overflow:hidden;
+                text-overflow:ellipsis;
+            }
+            p{
+                width:5.9rem;
+                margin:.1rem .0rem .4rem;
+                white-space:nowrap;
+                overflow:hidden;
+                text-overflow:ellipsis;
+            }
+            .white{
+                background-color:#fff;
+            }
+        }
+    }
+}
