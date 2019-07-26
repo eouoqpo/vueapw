@@ -13,6 +13,7 @@
     "flex.css": "^1.1.7",
     "iview": "^3.4.2",
     "muse-ui": "^3.0.2",
+    "muse-ui-message": "^0.2.1",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "vue": "^2.6.10",
