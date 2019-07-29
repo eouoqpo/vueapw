@@ -2,7 +2,7 @@
     <div id="amion">
         <Top :info="'我的推广'" />
         <div class="cont">
-            <img src="../../assets/img/ercode.png">
+            <img :src="Imgurl ? Imgurl : require('../../assets/img/ercode.png')">
             <span>我的推广二维码：3306</span>
         </div>
     </div>
@@ -34,6 +34,7 @@
 <script>
     import Top from '../../components/Top.vue';
     import Bottom from '../../components/Bottom.vue';
+    import * as url from '../../config.js';
     export default {
         name:'myspread',
         components: {
@@ -50,17 +51,34 @@
                 ],
                 normal: {
                     value1: '不使用红包',
-                }
+                },
+                Imgurl:''
             }
         },
 
         mounted:function(){
-            
+            this.spread();
         },
 
         methods:{
             present(){
                 alert("present")
+            },
+            //    邀请推广二维码和编号
+            spread(){
+                let data = {};
+                let result = new Promise((resolve,reject) => {
+                this.$http.post(url.QRCode,data)
+                    .then(res => {
+                        console.log('printIn data after coming back',res.data);//获取数据
+                        if(res.msg == 'success'){
+                            this.Imgurl = res.data;
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                });
             }
         }
     }

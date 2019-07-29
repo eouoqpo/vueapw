@@ -16,6 +16,7 @@ let amion = axios.create({
 
 // 设置拦截器
 amion.interceptors.request.use(function (config) {
+    console.log("设置拦截器的data info",config)
     //在发送请求之前做某事
     return config;
 }, function (error) {
@@ -24,16 +25,18 @@ amion.interceptors.request.use(function (config) {
 });
 //响应拦截器
 amion.interceptors.response.use(function (response) {
+    console.log("对响应数据做些事data info",response)
     //对响应数据做些事
     return response;
 }, function (error) {
     //请求错误时做些事
+    console.log("请求错误时做些事data info",error)
     return Promise.reject(error);
 });
 
 // 请求成功的回调
 function checkStatus(res) {
-    console.log(res)
+    console.log("success data info before return ",res);
     //请求结束成功
     if (res.status === 200 || res.status === 304) {
         // console.log("code 200 code 304 res",res)
@@ -55,7 +58,7 @@ function checkStatus(res) {
 
 // 请求失败的回调
 function checkCode(res) {
-    console.log("axios checkCode info",res)
+    console.log("default data info before retrun ",res);
     // if (res.code === 0) {
     //     //    感觉失败的处理有问题
     //     throw new Error(res.msg)
@@ -83,9 +86,7 @@ export default {
             Msg: user ? user.Sid : "",
             Data: data
         }
-        console.log("axios req info",Req);
         console.log("json axions req info",JSON.stringify(Req))
-        console.log("qs axios req info ",qs.stringify(Req))
         if (!url) return;
         return amion({
             method: 'post',

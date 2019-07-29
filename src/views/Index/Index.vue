@@ -3,72 +3,17 @@
         <Top/>
         <div class="contain" flex="dir:left">
             <mu-carousel hide-indicators hide-controls>
-                <mu-carousel-item>
-                    <img src="../../assets/img/car1.jpg">
-                </mu-carousel-item>
-                <mu-carousel-item>
-                    <img src="../../assets/img/car2.jpg">
-                </mu-carousel-item>
-                <mu-carousel-item>
-                    <img src="../../assets/img/car3.jpg">
+                <mu-carousel-item v-for="info in Banner" :key="info.Id">
+                    <img :src="info.ImgUrl ? info.ImgUrl : require('../../assets/img/car1.jpg')">
                 </mu-carousel-item>
             </mu-carousel>
-            <!-- <Carousel v-model="value1" loop>
-                <CarouselItem>
-                    <img src="../../assets/img/car1.jpg">
-                </CarouselItem>
-                <CarouselItem>
-                    <img src="../../assets/img/car2.jpg">
-                </CarouselItem>
-                <CarouselItem>
-                    <img src="../../assets/img/car3.jpg">
-                </CarouselItem>
-            </Carousel> -->
         </div>
 
         <div class="index_sort">
-            <div flex="dir:left box:mean">
-                <div flex="dir:top cross:center">
-                    <img src="../../assets/img/sample1.png">
-                    <span>玉翠珠宝</span>
-                </div>
-                <div flex="dir:top cross:center">
-                    <img src="../../assets/img/sample2.png">
-                    <span>玉翠珠宝</span>
-                </div>
-                <div flex="dir:top cross:center">
-                    <img src="../../assets/img/sample3.png">
-                    <span>玉翠珠宝</span>
-                </div>
-                <div flex="dir:top cross:center">
-                    <img src="../../assets/img/sample4.png">
-                    <span>玉翠珠宝</span>
-                </div>
-                <div flex="dir:top cross:center">
-                    <img src="../../assets/img/sample5.jpg">
-                    <span>玉翠珠宝</span>
-                </div>
-            </div>
-            <div flex="dir:left box:mean">
-                <div flex="dir:top cross:center">
-                    <img src="../../assets/img/sample1.png">
-                    <span>玉翠珠宝</span>
-                </div>
-                <div flex="dir:top cross:center">
-                    <img src="../../assets/img/sample2.png">
-                    <span>玉翠珠宝</span>
-                </div>
-                <div flex="dir:top cross:center">
-                    <img src="../../assets/img/sample3.png">
-                    <span>玉翠珠宝</span>
-                </div>
-                <div flex="dir:top cross:center">
-                    <img src="../../assets/img/sample4.png">
-                    <span>玉翠珠宝</span>
-                </div>
-                <div flex="dir:top cross:center">
-                    <img src="../../assets/img/sample5.jpg">
-                    <span>玉翠珠宝</span>
+            <div class="sortCont">
+                <div flex="dir:top cross:center" v-for="(info) in GoodsType" :key="info.Id" @click="sortType(info.Id)">
+                    <img :src="info ? info.Image : require('../../assets/img/sample1.png')">
+                    <span :class="stype==info.Id ? 'theme' : ''">{{info.Title}}</span>
                 </div>
             </div>
         </div>
@@ -87,33 +32,13 @@
             </div>
             <div class="commont_content">
 
-                <div class="single" flex="dir:top" @click="goDetail(1)">
-                    <img :src='require("../../assets/img/base.jpg")'>    
-                    <span>amion test</span>
-                    <span>起拍价：5000</span>
+                <div class="single" flex="dir:top" @click="goDetail(1)" v-for="info in IndexList" :key="info.Id">
+                    <img :src='info.Image ? info.Image : require("../../assets/img/base.jpg")'>    
+                    <span>{{info.Title}}</span>
+                    <!--   let yourtemp = this.state.mytab==1 ? "起拍价" : this.state.mytab== 2 ? "最终价" : "一口价";   '起拍价' + info.StartMoney  -->
+                    <span>{{addNum==1 ? ('起拍价' + info.StartMoney) : addNum==2 ? ('最终价' + info.EndMoney) : ('一口价' + info.EndMoney)}}</span>
                     <span>距结束：47:50:12</span>
                 </div>
-
-                <div class="single" flex="dir:top" @click="goDetails(1)">
-                    <img :src='require("../../assets/img/base.jpg")'>    
-                    <span>amion test</span>
-                    <span>起拍价：5000</span>
-                    <span>距结束：47:50:12</span>
-                </div> 
-
-                <div class="single" flex="dir:top" @click="goDetail(1)">
-                    <img :src='require("../../assets/img/base.jpg")'>    
-                    <span>amion test</span>
-                    <span>起拍价：5000</span>
-                    <span>距结束：47:50:12</span>
-                </div> 
-
-                <div class="single" flex="dir:top" @click="goDetail(1)">
-                    <img :src='require("../../assets/img/base.jpg")'>    
-                    <span>amion test</span>
-                    <span>起拍价：5000</span>
-                    <span>距结束：47:50:12</span>
-                </div> 
 
             </div>
         </div>
@@ -129,9 +54,7 @@
         font-size: .36rem;
         .contain{
             overflow: hidden;
-            //   
             .mu-carousel,.ivu-carousel{
-                // float: left;
                 width:100%;
                 height: 4rem;
                 img{
@@ -145,14 +68,24 @@
             background-color:#fff;
             padding-top:.04rem;
             padding-bottom:.15rem;
-            div{
-                margin:.15rem 0rem .1rem;
-                img{
-                    width:1rem;
-                    height: 1rem;
-                }
-                span{
-                    padding-top:.06rem;
+            .sortCont{
+                div{               
+                    margin:.15rem 0rem .1rem;
+                    display: inline-block;
+                    width:2.16rem;
+                    img{
+                        width:1rem;
+                        margin:0px auto;
+                        height: 1rem;
+                        border-radius: 50%;
+                    }
+                    span{
+                        padding-top:.06rem;
+                        text-align: center;
+                    }
+                    .theme{
+                        color:#ff1933;
+                    }
                 }
             }
         }
@@ -180,15 +113,22 @@
 <script>
     import Bottom from '../../components/Bottom.vue';
     import Top from '../../components/Top.vue';
-    // import MuCarousel from 'muse-ui';
-    // import { Carousel } from 'iview';
+    import * as url from '../../config.js';
+    import Maps from '../../utils/tool.js';
     export default {
         name: 'index',
         data() {
             return {
                 show: false,
+                stype:0,
                 value1:0,
                 type:'add',
+                Banner:[],
+                GoodsType:[],
+                IndexList:[],
+
+                addNum:1,  //   加减价所对应的的数字   分别是  1 2 3 
+                stypeNum:0
             };
         },
   
@@ -198,7 +138,8 @@
         },
 
         mounted(){
-            
+            this.list();
+            this.getSecond(1)
         },
 
         methods:{
@@ -206,8 +147,14 @@
                 this.show = true
             },
 
+            sortType(n){
+                this.stype = n;
+            },
+
             onChangeType(n){
+                //   1 2 3 加价 减价 一口价
                 this.type = n;
+                this.addNum = n == 'add' ? 1 : n == 'dec' ? 2 : 3;
             },
 
             onClickLeft(){
@@ -223,8 +170,46 @@
                 this.$router.push({path:"/index/stable"});
             },
 
-            amion(n){
-                console.log("Info amion")
+            //    获取首页的详情
+            list(){
+                let data = {};
+                let result = new Promise((resolve,reject)=> {
+                    this.$http.post(url.IindexData,data).then((res) => {
+                        if(res.msg == "success"){
+                            this.Banner = res.data.Banner;
+                            this.GoodsType = res.data.GoodsType;
+                            this.stypeNum = res.data.GoodsType[0].Id;
+                        }else{
+                            this.$alert(res.msg,'温馨提示');
+                        }
+                    }).catch((error)=>{
+                        console.log("error")
+                    });
+                })
+            },
+
+            //   下面的推荐
+            getSecond(n){
+                let page;
+                n ? (page = n) : page=1;
+                let data = {
+                    GoodsFlag1: +this.stypeNum,  //一级分类   +(this.state.tempSort)
+                    GoodsType: +this.addNum,      //1 2 3 加价 减价 一口价
+                    Page:page,        //
+                    Limit:10,       //
+                };
+                let result = new Promise((resolve,reject) => {
+                    this.$http.post(url.FGoodsList,data).then(res => {
+                        console.log('getSecond data info in index',res)
+                        if(res.msg == 'success'){
+                            this.IndexList = res.data.List
+                        }else{
+                            this.$alert(res.msg,'温馨提示');
+                        }
+                    }).catch(error => {
+                        console.log(error)
+                    })
+                })
             }
         } 
     }

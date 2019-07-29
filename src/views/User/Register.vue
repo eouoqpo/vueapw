@@ -16,7 +16,7 @@
             </div>
             <!--    登录密码     -->
             <div class="single" flex="cross:center">
-                <input type="text" ref="pwd" placeholder="请输入密码">
+                <input type="password" ref="pwd" placeholder="请输入密码">
             </div>
             <!--     验证是获取的图片验证码      -->
             <div :class="showType ? 'vcode' : 'none'" flex="dir:top">
@@ -198,6 +198,14 @@
             //   改变隐藏框的 
             changType(){
                 if(this.whetherClick){
+                    if (!this.$refs.phone.value) {
+                        this.$alert('请填写手机号 ！', '温馨提示');
+                        return;
+                    };
+                    if (!/^1[3456789]\d{9}$/.test(this.$refs.phone.value)) {
+                        this.$alert('请输入正确的手机号码 ！', '温馨提示');
+                        return;
+                    };
                     this.getVcode();
                     this.showType = !this.showType;
                 }
@@ -243,6 +251,7 @@
                     this.whetherClick = false;
                     setTimeout(()=>{this.countdown()}, 1000);
                 }else{
+                    this.count = 60;
                     this.whetherClick = true;
                     this.countDown = '获取验证码';
                 }
@@ -286,21 +295,23 @@
                     this.$alert('请输入密码 ！', '温馨提示');
                     return;
                 };
-                if(!reg.test(this.Srefs.pwd.value)){
+                let reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,20}$/;
+                if(!reg.test(this.$refs.pwd.value)){
                     this.$alert('请输入两种不同类型且长度不小于8的密码 ！', '温馨提示');
                     return;
                 }
-                if (!this.$refs.Phonecode.value) {
+                if (!this.$refs.phonecode.value) {
                     this.$alert('请输入短信验证码 ！', '温馨提示');
                     return;
                 };
                 let data = {
-                    Code: this.$refs.phonecode.value,
-                    Phone: this.$refs.phone.value,
-                    Pwd: this.$refs.pwd.value,
-                    Brokercode: '',
-                    UserName:this.$refs.nick.value
+                    'Code': this.$refs.phonecode.value,
+                    'Phone': this.$refs.phone.value,
+                    'Pwd': this.$refs.pwd.value,
+                    'Brokercode': this.$refs.recom.value ? this.$refs.recom.value : "",
+                    'UserName':this.$refs.nick.value
                 };
+                console.log("req data info",data);
                 let result = new Promise((resolve,reject) => {
                 this.$http.post(url.Register,data)
                     .then(res => {

@@ -5,29 +5,30 @@
             <div flex="dir:left box:justify">
                 <img class="portrait" src="../../assets/img/logoImg.png">
                 <div flex="dir:top">
-                    <h3>amiona阿萨德</h3>
+                    <!--    没有判断这些数据不存在的情况    -->
+                    <h3>{{user.Account.substr(0,3) + '***' + user.Account.substr(-4)}}</h3>
                     <p>
-                        <img class="level" src="../../assets/img/lv.png"><i>1</i>
-                        <span>amion</span>
+                        <img class="level" src="../../assets/img/lv.png"><i>{{user.Level}}</i>
+                        <span>{{user.UserName}}</span>
                     </p>
                 </div>
                 <img class="setting" @click="goSetting" src="../../assets/img/setting.png">
             </div>
             <div class="list" flex="dir:left box:mean">
                 <p flex="dir:top" @click="myAccount">
-                    <span>34.00</span>
+                    <span>{{user.Amt}}</span>
                     <span>我的余额</span>
                 </p>
                 <p flex="dir:top" @click="myReward">
-                    <span>4</span>
+                    <span>{{user.HongBaoNum}}</span>
                     <span>我的红包</span>
                 </p>
                 <p flex="dir:top" @click="myAuct">
-                    <span>23</span>
+                    <span>{{user.CanPaiNum}}</span>
                     <span>我的参拍</span>
                 </p>
                 <p flex="dir:top" @click="myFocus">
-                    <span>34</span>
+                    <span>{{user.ShouCangNum}}</span>
                     <span>我的关注</span>
                 </p>
             </div>
@@ -110,12 +111,10 @@
             </div>
         </div>
 
-        <div class="adsCont">
+        <div class="useradd">
+            <!-- adsCont   useradd 特别好奇，刚开始的时候可以显示下面的广告，过了不到一个小时就不显示了   换一个类名又正常了   -->
             <div>
-                <img src="../../assets/img/base.jpg">
-                <img src="../../assets/img/base.jpg">
-                <img src="../../assets/img/base.jpg">
-                <img src="../../assets/img/base.jpg">
+                <img v-for='(item) in adList' :key="item.Id" :src="item ? item.ImgUrl : require('../../assets/img/base.jpg')">
             </div>
         </div>
 
@@ -215,7 +214,7 @@
                 }
             }
         }
-        .adsCont{
+        .useradd,.adsCont{
             width: 10.8rem;
             padding:.0rem .5rem .2rem;
             overflow-x: auto;
@@ -235,11 +234,15 @@
 <script>
     import Top from '../../components/Top.vue';
     import Bottom from '../../components/Bottom.vue';
+    import * as url from '../../config.js';
+    import Maps from '../../utils/tool.js';
     export default {
         name: 'user',
         data() {
             return {
                 show: false,
+                user:Maps.get('user'),
+                adList:[]
             };
         },
 
@@ -249,10 +252,15 @@
         },
 
         mounted(){
-            
+            this.defaultStatus();
+            this.adverList();
         },
 
         methods:{
+            //      判断用户有没有登录  没有登录的话直接跳转到登录页面
+            defaultStatus(){
+                Maps.get('user') ? '' : this.$router.push({name:'login'})
+            },
             //   设置页面
             goSetting(){
                 this.$router.push({
@@ -331,6 +339,33 @@
                         info:'二次拍卖'
                     }
                 })
+            },
+
+            //    获取数据的情况
+
+            //    请求广告图    不能重复定义，在使用前必选先设置默认的类型
+            adverList(){
+                // let result4 = request(url.BannerInfo,data);  // 广告图
+                // result4.then( value => {
+                //     if(value instanceof Array){
+                //         this.setState({
+                //             addList:value
+                //         })
+                //     }
+                // })
+                let data = {};
+                let result = new Promise((resolve,reject) => {
+                this.$http.post(url.BannerInfo,data)
+                    .then(res => {
+                        console.log('printIn data after coming back',res.data);//获取数据
+                        if(res.msg == 'success'){
+                            this.adList = res.data;
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                });
             }
         } 
     }
