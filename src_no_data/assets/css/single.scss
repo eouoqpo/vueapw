@@ -1,0 +1,28 @@
+.commont_content{
+    padding:.2rem .4rem 1.4rem;
+    background-color:#f0f0f0;
+    .single{
+        width:4.9rem;
+        background-color: #fff;
+        display: inline-block;
+        margin-bottom:.2rem;
+        padding-bottom: .14rem;
+        border-radius: .3rem;
+        img{
+            width:4.9rem;
+            height: 2.45rem;
+            border-radius: .3rem .3rem 0rem 0rem;
+            margin-bottom:.1rem;
+        }
+        span{   
+            color:#999;
+            padding-left:.3rem;
+        }
+        .theme{
+            color:#ff1933;
+        }
+    }
+    .single:nth-child(2n+1){
+        margin-right:.2rem;
+    }
+}

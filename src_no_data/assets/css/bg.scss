@@ -1,0 +1,82 @@
+.white{
+    background-color:#fff;
+}
+.theme{
+    color:#ff1933;
+}
+.themeBg{
+    background-color:#ff1933;
+}
+
+.contitle{
+    color:#666;
+    background-color:#fff;
+    margin-bottom:.1rem;
+    p{
+        text-align: center;
+        height: 1.3rem;
+        span{
+            width:.5rem;
+            // height: .06rem;
+            height: .1rem;
+            margin-top:.06rem;
+            border-radius: .1rem;
+            display:inline-block;
+            background-color:#ff1933;
+        }
+        .span{
+            background-color:#fff;
+        }
+    }
+}
+
+//    用户充值提现的共同样式
+.cont{
+    .border{
+        height: 1.6rem;
+        line-height: 1.6rem;
+        background-color:#fff;
+        padding-left:.5rem;
+        border-bottom:.02rem solid #f0f0f0;
+        span{
+            padding-right:.5rem;
+        }
+    }
+    .one{  //   div:nth-child(1)
+        height: 1.16rem;
+        line-height: 1.16rem;
+        background-color:#f0f0f0;
+    }
+    p{
+        color:#fff;
+        width:8rem;
+        font-size: .42rem;
+        margin:1.2rem auto .0rem;
+        height: 1.2rem;
+        line-height: 1.2rem;
+        border-radius: .6rem;
+        text-align:center;
+        background-color:#ff1933;
+    }
+}
+
+//   推荐明细等列表的共同样式
+.singlelist{
+    padding:.30rem .0rem;
+    border-bottom:.02rem solid #f0f0f0;
+    font-size: .38rem;
+    div{
+        padding:.0rem .0rem .0rem .5rem;
+    }
+    i{
+        color:#cecaca;
+        margin-bottom:.2rem;
+    }
+    p{
+        color:#ff1933;
+        margin-bottom:.2rem;
+    }
+    b{
+        color:#333;
+    }
+}

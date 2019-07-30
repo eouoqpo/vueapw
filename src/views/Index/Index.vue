@@ -31,15 +31,12 @@
                 </p>
             </div>
             <div class="commont_content">
-
-                <div class="single" flex="dir:top" @click="goDetail(1)" v-for="info in IndexList" :key="info.Id">
+                <div class="single" flex="dir:top" @click="goDetail(info.GoodsType,info.Id)" v-for="info in IndexList" :key="info.Id">
                     <img :src='info.Image ? info.Image : require("../../assets/img/base.jpg")'>    
                     <span>{{info.Title}}</span>
-                    <!--   let yourtemp = this.state.mytab==1 ? "起拍价" : this.state.mytab== 2 ? "最终价" : "一口价";   '起拍价' + info.StartMoney  -->
-                    <span>{{addNum==1 ? ('起拍价' + info.StartMoney) : addNum==2 ? ('最终价' + info.EndMoney) : ('一口价' + info.EndMoney)}}</span>
-                    <span>距结束：47:50:12</span>
+                    <span :class="(parseInt((new Date(info.EndTime.replace(/-/g, '/'))).getTime()) < parseInt((new Date()).valueOf()) || info.GoodsStatus ==2 || (info.GoodsType ==3 && info.Stock == 0)) ? '' : 'theme'">{{addNum==1 ? ('起拍价 ' + info.StartMoney) : addNum==2 ? ('最终价 ' + info.EndMoney) : ('一口价 ' + info.EndMoney)}}</span>
+                    <CountDown :item="info" type="1" :key="info.Id" />
                 </div>
-
             </div>
         </div>
 
@@ -115,6 +112,7 @@
     import Top from '../../components/Top.vue';
     import * as url from '../../config.js';
     import Maps from '../../utils/tool.js';
+    import CountDown from '../../components/CountDown.vue';
     export default {
         name: 'index',
         data() {
@@ -133,6 +131,7 @@
         },
   
         components: {
+            CountDown,
             Bottom,
             Top
         },
@@ -149,25 +148,32 @@
 
             sortType(n){
                 this.stype = n;
+                this.stypeNum = n;
+                this.getSecond(1)
             },
 
             onChangeType(n){
                 //   1 2 3 加价 减价 一口价
                 this.type = n;
+                this.stype = 0;
+                this.stypeNum = 0;
                 this.addNum = n == 'add' ? 1 : n == 'dec' ? 2 : 3;
+                this.getSecond(1)
             },
 
             onClickLeft(){
                 this.$router.go(-1)
             },
             //    这个是加价拍和减价拍的详情页
-            goDetail(n){
-                //    {path:'/detail',query:{id}
-                this.$router.push({path:"/index/detail"});
-            },
-            //   这个是一口价的详情页
-            goDetails(){
-                this.$router.push({path:"/index/stable"});
+            goDetail(n,id){
+                let name =  n == 3 ? 'stable' : 'detail';
+                this.$router.push({
+                    name:name,
+                    query:{
+                        type:id
+                    }
+                });                
+                // window.location.href= "http://"+Online+"/filed/info?id=" +id;
             },
 
             //    获取首页的详情
@@ -178,7 +184,7 @@
                         if(res.msg == "success"){
                             this.Banner = res.data.Banner;
                             this.GoodsType = res.data.GoodsType;
-                            this.stypeNum = res.data.GoodsType[0].Id;
+                            // this.stypeNum = res.data.GoodsType[0].Id;
                         }else{
                             this.$alert(res.msg,'温馨提示');
                         }
@@ -190,6 +196,7 @@
 
             //   下面的推荐
             getSecond(n){
+                console.log(" the info of stypeNum",this.stypeNum)
                 let page;
                 n ? (page = n) : page=1;
                 let data = {
@@ -198,6 +205,7 @@
                     Page:page,        //
                     Limit:10,       //
                 };
+                console.log("   getSecond    data   info",data);
                 let result = new Promise((resolve,reject) => {
                     this.$http.post(url.FGoodsList,data).then(res => {
                         console.log('getSecond data info in index',res)
@@ -211,6 +219,12 @@
                     })
                 })
             }
-        } 
+        },
+        beforeDestroy(){
+            clearInterval(this.timer);
+        },
+        destroyed(){
+            clearInterval(this.timer);
+        }
     }
 </script>

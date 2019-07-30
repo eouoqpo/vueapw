@@ -4,92 +4,42 @@
             <img src="../../assets/img/back.png">
         </p>
         <div class="contain" flex="dir:left">
-            <mu-carousel hide-indicators hide-controls>
-                <mu-carousel-item>
-                    <img src="../../assets/img/car1.jpg">
-                </mu-carousel-item>
-                <mu-carousel-item>
-                    <img src="../../assets/img/car2.jpg">
-                </mu-carousel-item>
-                <mu-carousel-item>
-                    <img src="../../assets/img/car3.jpg">
+            <mu-carousel hide-indicators hide-controls v-if='goodInfo'>
+                <mu-carousel-item v-for='(info,key) in this.goodInfo.Imglist.split(";")' :key='key'>
+                    <img :src="info ? info : require('../../assets/img/car1.jpg')">
                 </mu-carousel-item>
             </mu-carousel>
         </div>
 
         <div>
-            <h3 class="countdown">距结束：32:34:59</h3>
+            <h3 class="countdown"><CountDown v-if="this.goodInfo" :item="this.goodInfo" type="2"/></h3>
         </div>
         <div class="focus" flex="dir:left box:last">
-            <h3 flex="cross:center">商品的名称所发生的商</h3>
-            <img @click="focus" :src="wheFoucs ? require('../../assets/img/myfocused.png') : require('../../assets/img/myfocus.png')">
+            <h3 flex="cross:center">{{goodInfo ? goodInfo.Title : 'amion auction'}}</h3>
+            <img @click="addColl" :src="wheFoucs ? require('../../assets/img/myfocused.png') : require('../../assets/img/myfocus.png')">
         </div>
         <div class="goodInfo">
             <p>
                 <i>拍卖价格：</i>
-                <span class="theme">6800</span>
+                <span class="theme">￥{{this.goodInfo ? this.goodInfo.EndMoney : "--"}} 元</span>
             </p>
             <p>
                 <i>市场估价：</i>
-                <span>6800</span>
+                <span>￥{{this.goodInfo ? this.goodInfo.CankaoMoney : "--"}}元</span>
             </p>
             <p>
                 <i>剩余数量：</i>
-                <span>23</span>
+                <span>{{this.goodInfo ? this.goodInfo.Stock : "0"}}</span>
             </p>
             <p>
                 <i>结束时间：</i>
-                <span>2019-7-10 20:03:37</span>
+                <span>{{this.goodInfo ? this.goodInfo.EndTime : "--"}}</span>
             </p>
-            <div>
-            </div>
         </div>
 
         <!--      商品的详情页信息      -->
         <div class="goodDetails">
-            是的发送到发送到发斯蒂芬
-            说的分离水电费水电费是的发送到
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-
-            拉萨的发了啥地方 <br>拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            拉萨的发了啥地方 <br>
-            LS地方了胜多负少电风扇是劳动法扣水电费s <br>
-            <!-- <div className={style.content}
-                dangerouslySetInnerHTML={{__html: this.state.item && this.state.item.Context ? this.state.item.Context : null}}/> -->
+            <div class="content" v-html="this.goodInfo ? this.goodInfo.Content : ''"></div>
         </div>
 
         <div class="offerCont">
@@ -97,9 +47,9 @@
                 <li flex="dir:left box:mean">
                     <p flex="cross:center">
                         商品数量：
-                        <img src='../../assets/img/decrease.png' @click="decrease">
+                        <img src='../../assets/img/decrease.png' @click="stockNumber(0)">
                         <span>{{ num }}</span>
-                        <img src='../../assets/img/increase.png' @click="increase">
+                        <img src='../../assets/img/increase.png' @click="stockNumber(1)">
                     </p>
                     <p>单价：<span>4500</span></p>
                 </li>
@@ -121,6 +71,7 @@
         .offerCont{
             padding:.30rem .5rem;
             background-color:#fff;
+            border-top:.2rem solid #f0f0f0;
             p{
                 font-size: .38rem;
                 height: 1.1rem;
@@ -147,7 +98,9 @@
     import Bottom from '../../components/Bottom.vue';
     import {Message} from 'muse-ui-message';
     import Top from '../../components/Top.vue';
-    // import MuCarousel from 'muse-ui';
+    import * as url from '../../config.js';
+    import Maps from '../../utils/tool.js';
+    import CountDown from '../../components/CountDown.vue';
     export default {
         name: 'index',
         data() {
@@ -155,41 +108,108 @@
                 show: false,
                 type:'add',
                 wheFoucs:false,
-                num:1
+                num:1,
+                goodInfo:'',
+                stockNum:0,
             };
         },
   
         components: {
+            CountDown,
             Bottom,
             Top
         },
 
         mounted(){
-            
+            if(this.$route.query.type){
+                this.goodId = this.$route.query.type;
+                this.collected();
+                this.getList();
+            }else{
+                this.$router.push({
+                    name:'login'
+                })
+            }
         },
 
         methods:{
-            onClickRight(){
-                this.show = true
+
+            getList(){
+                let data = {
+                    "Id":+this.goodId
+                };
+                let result = new Promise((resolve,reject)=>{
+                    this.$http.post(url.GoodsInfo,data).then(res => {
+                        console.log("get goodsInfo details",res)
+                        if(res.msg == 'success'){
+                            this.goodInfo = res.data;
+                            this.stockNum = res.data.Stock;
+                            this.auctType = res.data.GoodsType == 1 ? "加价" : res.data.GoodsType == 2 ? "减价" : "一口价"
+                        }
+                    }).catch(error => {
+                        console.log("failed in collected",error);
+                    });
+                })
             },
 
-            //   用户关注
-            focus(){
-                this.wheFoucs = !this.wheFoucs
+            //    判断用户是否收藏了
+            collected(){
+                let data = {
+                    GoodsId: +this.goodId
+                };
+                console.log("check whether collect",data)
+                let result = new Promise((resolve,reject)=>{
+                    this.$http.post(url.WheCollect,data).then(res => {
+                        if(res.msg == 'success'){
+                            res.data == "Y" ? this.wheFoucs = true : this.wheFoucs = false;
+                        }
+                    }).catch(error => {
+                        console.log("failed in collected",error);
+                    });
+                })
             },
 
-            decrease(){
-                let num = this.num;
-                // $alert('温馨提示', '商品的数量最低为 1 ！');
-                Message.alert('温馨提示', '商品的数量最低为 1 ！');
-                // num > 1 ? this.num = num - 1 : alert("温馨提示，商品的数量最低为 1 ！")
+            // addColl    添加收藏    删除收藏
+            addColl(){
+                if(Maps.get("user").Status ==4){
+                    let data = {
+                        "GoodsId":+this.goodId
+                    };
+                    let myurl = this.wheFoucs ? url.delCol : url.addCol;
+                    let result = new Promise((resolve,reject)=>{
+                        this.$http.post(myurl,data).then(res => {
+                            if(res.msg == 'success'){
+                                this.wheFoucs = !this.wheFoucs;
+                            }
+                        }).catch(error => {
+                            console.log(error);
+                        });
+                    })
+                }else{
+                    this.isAuth();
+                }
             },
-            increase(){
+
+            stockNumber(n){
                 let num = this.num;
-                num < 4 ? this.num = num + 1 : alert("超过最大值")
+                if(n == 0){
+                    num > 1 ? this.num = num - 1 : this.$alert('温馨提示', '商品的数量最低为 1 ！');
+                }else{
+                    num < this.stockNum ? this.num = num + 1 : this.$alert('温馨提示', '商品的数量超过了最大值 ！');
+                }
             },
             purchase(){
-                alert("用户正在购买 ！")
+                // this.$alert('温馨提示', '商品的数量最低为 1 ！');
+                this.$confirm('是否确定购买', '温馨提示', {
+                    type: 'warning'
+                }).then(({ result }) => {
+                    if (result) {
+                        console.log("purchase result info confrim",result)
+                    } else {
+                        console.log("purchase cancle info ")
+                        // this.$toast.message('点击了取消');
+                    }
+                });
             },
 
             onChangeType(n){

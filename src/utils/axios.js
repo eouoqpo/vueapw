@@ -86,8 +86,9 @@ export default {
             Msg: user ? user.Sid : "",
             Data: data
         }
-        console.log("json axions req info",JSON.stringify(Req))
+        // console.log("json axions req info",JSON.stringify(Req))
         if (!url) return;
+        console.log("url in axios info",url)
         return amion({
             method: 'post',
             url: url,

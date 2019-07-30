@@ -4,65 +4,59 @@
             <img src="../../assets/img/back.png">
         </p>
         <div class="contain" flex="dir:left">
-            <mu-carousel hide-indicators hide-controls>
-                <mu-carousel-item>
-                    <img src="../../assets/img/car1.jpg">
-                </mu-carousel-item>
-                <mu-carousel-item>
-                    <img src="../../assets/img/car2.jpg">
-                </mu-carousel-item>
-                <mu-carousel-item>
-                    <img src="../../assets/img/car3.jpg">
+            <mu-carousel hide-indicators hide-controls v-if='goodInfo'>
+                <mu-carousel-item v-for='(info,key) in this.goodInfo.Imglist.split(";")' :key='key'>
+                    <img :src="info ? info : require('../../assets/img/car1.jpg')">
                 </mu-carousel-item>
             </mu-carousel>
         </div>
         <div>
-            <h3 class="countdown">距结束：32:34:59</h3>
+            <h3 class="countdown"><CountDown v-if="this.goodInfo" :item="this.goodInfo" type="2"/></h3>
         </div>
         <div class="focus" flex="dir:left box:last">
-            <h3 flex="cross:center">商品的名称所发生的商</h3>
-            <img @click="focus" :src="wheFoucs ? require('../../assets/img/myfocused.png') : require('../../assets/img/myfocus.png')">
+            <h3 flex="cross:center">{{goodInfo ? goodInfo.Title : 'amion auction'}}</h3>
+            <img @click="addColl" :src="wheFoucs ? require('../../assets/img/myfocused.png') : require('../../assets/img/myfocus.png')">
         </div>
         <div class="goodInfo">
             <p>
                 <i>当前价格：</i>
-                <span class="theme">所发生的阿萨德发送到</span>
+                <span class="theme">￥{{this.nowPrice ? this.nowPrice : "--"}}</span>
             </p>
             <p>
                 <i>市场估价：</i>
-                <span>所发生的阿萨德发送到</span>
+                <span>￥{{this.goodInfo ? this.goodInfo.CankaoMoney : "--"}}</span>
             </p>
             <p>
                 <i>起拍时间：</i>
-                <span>所发生的阿萨德发送到</span>
+                <span>{{this.goodInfo ? this.goodInfo.StartTime : "--"}}</span>
             </p>
             <p>
                 <i>结拍时间：</i>
-                <span>所发生的阿萨德发送到</span>
+                <span>{{this.goodInfo ? this.goodInfo.EndTime : "--"}}</span>
             </p>
             <p>
                 <i>保证金：</i>
-                <span>所发生的阿 <i class="i_price">当前价格的 30%</i></span>
+                <span>{{this.goodInfo ? (this.nowPrice * this.goodInfo.GuaranteeBili/100) : 0}} <i class="i_price">当前价格的 {{this.goodInfo ? (this.goodInfo.GuaranteeBili) : "--"}} %</i></span>
             </p>
             <div>
                 <ul flex="box:mean">
                     <li flex="dir:top">
                         <p>拍卖方式</p>
-                        <p class="theme">￥2000</p>
+                        <p class="theme">{{this.auctType ? auctType :""}}拍</p>
                     </li>
                     <li flex="dir:top">
-                        <p>最高限价</p>
-                        <p class="theme">￥2000</p>
+                        <p>{{this.auctType =="加价" ?  "最高限价" : "最低限价"}}</p>
+                        <p class="theme">￥{{ this.goodInfo ? this.goodInfo.EndMoney : "--" }}</p>
                     </li>
                 </ul>
                 <ul flex="box:mean">
                     <li flex="dir:top">
                         <p>起拍价</p>
-                        <p class="theme">￥2000</p>
+                        <p class="theme">￥{{this.goodInfo ? this.goodInfo.StartMoney : "--"}}</p>
                     </li>
                     <li flex="dir:top">
                         <p>加价幅度</p>
-                        <p class="theme">￥2000</p>
+                        <p class="theme">￥{{this.goodInfo ? this.goodInfo.JiajiaMoney : "--"}}</p>
                     </li>
                 </ul>
             </div>
@@ -73,7 +67,7 @@
             <ul>
                 <li flex="dir:left box:last">
                     <h2>出价列表</h2>
-                    <p @click="priceInfo" class="priceInfo">查看更多</p>
+                    <p @click="priceInfo(this.goodInfo.Id)" class="priceInfo">查看更多</p>
                 </li>
                 <li flex="dir:left box:justify">
                     <p>189****6003</p>
@@ -97,12 +91,14 @@
         <div class="goodDetails">
             <!-- <div className={style.content}
                 dangerouslySetInnerHTML={{__html: this.state.item && this.state.item.Context ? this.state.item.Context : null}}/> -->
+            <div class="content" v-html="this.goodInfo ? this.goodInfo.Content : ''"></div>
         </div>
 
          <!--      用户出价拍卖     -->
         <p class="offer">
             出价
         </p>
+     
 
     </div>
 </template>
@@ -110,6 +106,24 @@
 <style lang="scss" scoped>
     @import 'src/assets/css/carousel.scss';
     .amion{
+        .countdown span{
+            color:#fff !important;
+        }
+        .goodDetails{
+            .content{
+                div{
+                    width:100%;
+                }
+                .image-wrap,.image-wrap{
+                    //   media-wrap image-wrap
+                    img{
+                        display: block;
+                        width: 100%;
+                        margin-bottom:.1rem;
+                    }
+                }
+            }
+        }
         .offerCont{
             background-color:#fff;
             ul{
@@ -163,42 +177,114 @@
     import Bottom from '../../components/Bottom.vue';
     import Top from '../../components/Top.vue';
     import MuCarousel from 'muse-ui';
+    import * as url from '../../config.js';
+    import Maps from '../../utils/tool.js';
+    import CountDown from '../../components/CountDown.vue';
     export default {
-        name: 'index',
+        name: 'detail',
         data() {
             return {
-                show: false,
-                type:'add',
-                wheFoucs:false
+                wheFoucs:false,
+                goodId:0,
+                goodInfo:'',
+                nowPrice:0,
+                auctType:''
             };
         },
   
         components: {
+            CountDown,
             Bottom,
             Top
         },
 
         mounted(){
-            
+            if(this.$route.query.type){
+                this.goodId = this.$route.query.type;
+                this.collected();
+                this.getList();
+            }else{
+                this.$router.push({
+                    name:'login'
+                })
+            }
         },
 
         methods:{
-            onClickRight(){
-                this.show = true
+            //    获取详情页的数据    不需要先判断用户是否登录了
+            getList(){
+                let data = {
+                    "Id":+this.goodId
+                };
+                let result = new Promise((resolve,reject)=>{
+                    this.$http.post(url.GoodsInfo,data).then(res => {
+                        console.log("get goodsInfo details",res)
+                        if(res.msg == 'success'){
+                            this.goodInfo = res.data;
+                            this.nowPrice = res.data.StartMoney;
+                            this.auctType = res.data.GoodsType == 1 ? "加价" : res.data.GoodsType == 2 ? "减价" : "一口价"
+                        }
+                    }).catch(error => {
+                        console.log("failed in collected",error);
+                    });
+                })
             },
 
-            //   用户关注
-            focus(){
-                this.wheFoucs = !this.wheFoucs
+
+            //    判断用户是否收藏了
+            collected(){
+                let data = {
+                    GoodsId: +this.goodId
+                };
+                console.log("check whether collect",data)
+                let result = new Promise((resolve,reject)=>{
+                    this.$http.post(url.WheCollect,data).then(res => {
+                        if(res.msg == 'success'){
+                            res.data == "Y" ? this.wheFoucs = true : this.wheFoucs = false;
+                        }
+                    }).catch(error => {
+                        console.log("failed in collected",error);
+                    });
+                })
             },
 
-            onChangeType(n){
-                this.type = n;
+            // addColl    添加收藏    删除收藏
+            addColl(){
+                if(Maps.get("user").Status ==4){
+                    let data = {
+                        "GoodsId":+this.goodId
+                    };
+                    let myurl = this.wheFoucs ? url.delCol : url.addCol;
+                    let result = new Promise((resolve,reject)=>{
+                        this.$http.post(myurl,data).then(res => {
+                            if(res.msg == 'success'){
+                                this.wheFoucs = !this.wheFoucs;
+                            }
+                        }).catch(error => {
+                            console.log(error);
+                        });
+                    })
+                }else{
+                    this.isAuth();
+                }
             },
 
-            onClickLeft(){
-                this.$router.go(-1)
+            //   用户实名认证  用户必须登录
+            isAuth(){
+                this.$confirm('您还未实名，请您先认证？', '温馨提示', {
+                    type: 'warning'
+                }).then(({ result }) => {
+                    if (result) {
+                        console.log("my isAuth")
+                        // this.$router.push({
+                        //     name:'auth'
+                        // })
+                    } else {
+                        console.log("cancle")
+                    }
+                });
             },
+
 
             //    路由的跳转
             goBack(){
