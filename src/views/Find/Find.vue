@@ -95,7 +95,7 @@
                 this.$router.push({
                     // path:'/find/flist',
                     name:'flist',
-                    params:{
+                    query:{
                         id:n,
                         title:title
                     }

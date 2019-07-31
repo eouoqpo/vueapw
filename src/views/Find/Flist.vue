@@ -75,7 +75,7 @@
         data() {
             return {
                flistInfo:[],
-               title:this.$route.params.title ? this.$route.params.title : '发现列表页'
+               title:this.$route.query.title ? this.$route.query.title : '发现列表'
             };
         },
 
@@ -85,14 +85,15 @@
         },
 
         mounted(){
-            // ( this.$route.params && this.$route.params.id ) ? this.flist() : console.log("info");
-            this.flist();
+            console.log("info    this.$route.query.id",this.$route.query.id);
+            ( this.$route.query && this.$route.query.id >=0 ) ? this.flist() : (console.log("info"));
+            // this.flist();
         },
 
         methods:{
             flist(){
                 let data = {
-                    Flag:+this.$route.params.id,   //    this.props.location.state.id
+                    Flag:+this.$route.query.id,   //    this.props.location.state.id
                     Page:1,
                     Limit:20
                 };
@@ -111,9 +112,9 @@
             goFdetail(id){
                 this.$router.push({
                     name:'fdetail',
-                    params:{
+                    query:{
                         id,
-                        // thtle
+                        title:this.title == '发现列表' ? '发现详情' : '分享详情'
                     }
                 })
             }

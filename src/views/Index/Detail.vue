@@ -11,7 +11,7 @@
             </mu-carousel>
         </div>
         <div>
-            <h3 class="countdown"><CountDown v-if="this.goodInfo" :item="this.goodInfo" type="2"/></h3>
+            <h3 class="countdown"><CountDown v-on:myspot='myspot' v-if="this.goodInfo" :item="this.goodInfo" type="2"/></h3>
         </div>
         <div class="focus" flex="dir:left box:last">
             <h3 flex="cross:center">{{goodInfo ? goodInfo.Title : 'amion auction'}}</h3>
@@ -89,15 +89,13 @@
 
         <!--      商品的详情页信息      -->
         <div class="goodDetails">
-            <!-- <div className={style.content}
-                dangerouslySetInnerHTML={{__html: this.state.item && this.state.item.Context ? this.state.item.Context : null}}/> -->
-            <div class="content" v-html="this.goodInfo ? this.goodInfo.Content : ''"></div>
+            <div id="infodetail" class="content" v-html="this.goodInfo ? this.goodInfo.Content : ''"></div>
         </div>
 
          <!--      用户出价拍卖     -->
-        <p class="offer">
+        <b :class="offerType ? '' : 'offer'" v-on:click="offerType ? offer : offer">
             出价
-        </p>
+        </b>
      
 
     </div>
@@ -108,21 +106,6 @@
     .amion{
         .countdown span{
             color:#fff !important;
-        }
-        .goodDetails{
-            .content{
-                div{
-                    width:100%;
-                }
-                .image-wrap,.image-wrap{
-                    //   media-wrap image-wrap
-                    img{
-                        display: block;
-                        width: 100%;
-                        margin-bottom:.1rem;
-                    }
-                }
-            }
         }
         .offerCont{
             background-color:#fff;
@@ -160,7 +143,7 @@
             margin-bottom:1rem;
         }
         //   用户出价拍卖
-        .offer{
+        b{
             bottom:0rem;
             height: 1rem;
             line-height: 1rem;
@@ -170,6 +153,9 @@
             position: fixed;
             text-align: center;
             background-color:#ff1933;
+        }
+        .offer{
+            background-color: #f0f0f0;
         }
     }
 </style>
@@ -188,7 +174,9 @@
                 goodId:0,
                 goodInfo:'',
                 nowPrice:0,
-                auctType:''
+                auctType:'',
+                priceList:[],    //   出价记录
+                offerType:false,   //  刚开始是默认用户不可以出价
             };
         },
   
@@ -199,6 +187,7 @@
         },
 
         mounted(){
+            console.log('mounted',this)
             if(this.$route.query.type){
                 this.goodId = this.$route.query.type;
                 this.collected();
@@ -222,7 +211,8 @@
                         if(res.msg == 'success'){
                             this.goodInfo = res.data;
                             this.nowPrice = res.data.StartMoney;
-                            this.auctType = res.data.GoodsType == 1 ? "加价" : res.data.GoodsType == 2 ? "减价" : "一口价"
+                            this.auctType = res.data.GoodsType == 1 ? "加价" : res.data.GoodsType == 2 ? "减价" : "一口价";
+                            this.OfferList();
                         }
                     }).catch(error => {
                         console.log("failed in collected",error);
@@ -230,6 +220,12 @@
                 })
             },
 
+            myspot(info){
+                // info ? 
+                // info ? this.offerType = info : (console.log("failed-------------------------------------"));
+                console.log('checked console NAN here ?',+info)
+                // console.log("myspot  info -----------------------------",info);
+            },
 
             //    判断用户是否收藏了
             collected(){
@@ -241,6 +237,53 @@
                     this.$http.post(url.WheCollect,data).then(res => {
                         if(res.msg == 'success'){
                             res.data == "Y" ? this.wheFoucs = true : this.wheFoucs = false;
+                        }
+                    }).catch(error => {
+                        console.log("failed in collected",error);
+                    });
+                })
+            },
+
+            //    用户出价
+            offer(){
+                console.log("offer")
+                if(Maps.get("user").Status ==4){
+                    let data = {
+                        GoodsId:+this.goodId,
+                        Money:this.nowPrice,
+                        HongbaoId:0   //   +this.refs.bankname.value
+                    };
+                    console.log("offer info data ",data)
+                    let result = new Promise((resolve,reject)=>{
+                        this.$http.post(url.offerAdd,data).then(res => {
+                            if(res.msg == 'success'){
+                                console.log('offer list res',res);
+                                this.$alert('你已成功出价 ！','温馨提示');
+                            }else{
+                                this.$alert(res.msg,'温馨提示');
+                            }
+                        }).catch(error => {
+                            console.log('error offer list',error)
+                        })
+                    })
+                }else{
+                    this.isAuth();
+                }
+            },
+
+            //    获取出价记录
+            OfferList(){
+                console.log('offerlist',this)
+                let data = {
+                    GoodsId: +this.goodId,
+                    Page:1,
+                    Limit:500
+                }
+                let result = new Promise((resolve,reject) => {
+                    this.$http.post(url.publicList,data).then(res => {
+                        console.log("get goodsInfo details",res)
+                        if(res.msg == 'success'){
+                            this.priceList = res.data.List
                         }
                     }).catch(error => {
                         console.log("failed in collected",error);

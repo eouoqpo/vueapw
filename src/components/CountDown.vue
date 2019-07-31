@@ -1,4 +1,6 @@
 <template>
+    <!--    有一个比较严重的问题就是 当父组件需要用到子组件的状态时，怎么把子组件的状态传递给父组件  -->
+    <!--    解决方法    设置模拟点击   把状态存储到 localstorage 中  不用这个组件在需要的地方写一个相同的方法或者函数等 -->
     <span :class="saleType != '已结束 ' ? 'theme' : ''">{{saleType + countTime}}</span>
 </template>
 
@@ -17,7 +19,8 @@
         data(){
             return {
                 countTime:'',
-                saleType:''
+                saleType:'',
+                amion:1,
             }
         },
         mounted(){
@@ -26,6 +29,7 @@
                 if(this.saleType != '已结束 '){
                     this.count();
                 }else{
+                    this.$emit('myspot',1)
                     clearInterval(this.timer);
                 }
             }, 1000);
@@ -64,7 +68,7 @@
                 }else{
                     this.countTime = change ? this.item.EndTime.split(' ')[1] : " " + myhour + ":" + myMint + ":" + mySecd + " ";
                 }
-            }
+            },
         },
         beforeDestroy(){
             clearInterval(this.timer);

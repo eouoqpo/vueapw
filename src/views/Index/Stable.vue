@@ -39,7 +39,7 @@
 
         <!--      商品的详情页信息      -->
         <div class="goodDetails">
-            <div class="content" v-html="this.goodInfo ? this.goodInfo.Content : ''"></div>
+            <div id="infodetail" class="content" v-html="this.goodInfo ? this.goodInfo.Content : ''"></div>
         </div>
 
         <div class="offerCont">
