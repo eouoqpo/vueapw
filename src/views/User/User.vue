@@ -3,7 +3,7 @@
         <!-- 上一部分 -->
         <div class="headerCont">
             <div flex="dir:left box:justify">
-                <img class="portrait" src="../../assets/img/logoImg.png">
+                <img class="portrait" src="../../assets/img/amionlogo.png">
                 <div flex="dir:top">
                     <!--    没有判断这些数据不存在的情况    -->
                     <h3>{{user.Account.substr(0,3) + '***' + user.Account.substr(-4)}}</h3>

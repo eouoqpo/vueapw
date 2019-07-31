@@ -2,29 +2,14 @@
     <div id="amion">
         <Top :info="'发现'"/>
         <div>
-            <div class='item' flex="dir:left box:last cross:center" @click="fdetails(n)">
-                <span class="span1">
-                    sdfsd你是谁
-                </span>
-                <p class ='fff'><mu-badge content="3" circle color="#ff1933"/></p>                            
+            <div v-for='(info,key) in findList' :key='info.Id' class='item' flex="dir:left box:last cross:center" @click="fdetails(info.Id,'发现列表')">
+                <span :class="'span'+(key+1)">{{info.Title}}</span>
+                <p class ='fff'><mu-badge :content="''+info.Unread" circle color="#ff1933"/></p>                            
             </div>
-            <div class='item' flex="dir:left box:last cross:center" @click="fdetails(n)">
-                <span class="span2">
-                    sdfsd你是谁
-                </span>
-                <p class ='fff'><mu-badge content="3" circle color="#ff1933"/></p>                            
-            </div>
-            <div class='item' flex="dir:left box:last cross:center" @click="fdetails(n)">
-                <span class="span1">
-                    sdfsd你是谁
-                </span>
-                <p class ='fff'><mu-badge content="3" circle color="#ff1933"/></p>                            
-            </div>
-            <div class='item' flex="dir:left box:last cross:center" @click="fdetails(n)">
-                <span class="span3">
-                    sdfsd你是谁
-                </span>
-                <p class ='fff'><mu-badge content="3" circle color="#ff1933"/></p>                            
+
+            <div class='item' flex="dir:left box:last cross:center" @click="fdetails(0,'分享列表')">
+                <span class="span3">分享</span>
+                <p class ='fff'><mu-badge content="0" circle color="#ff1933"/></p>                            
             </div>
         </div>
         <Bottom :title="'find'"/>
@@ -64,15 +49,14 @@
     }
 </style>
 <script>
-    import Top from '../../components/Top.vue'
-    import Bottom from '../../components/Bottom.vue'
+    import Top from '../../components/Top.vue';
+    import Bottom from '../../components/Bottom.vue';
+    import * as url from '../../config.js';
     export default {
-    //    props:["active"], 
         name: 'find',
         data() {
             return {
-                show: false,
-                // title:'',
+                findList:[],
                 rawHtml:'<span style="color:yellow">sdhfsdfsd</span>'
             };
         },
@@ -83,31 +67,42 @@
         },
 
         mounted(){
-            // this.myconsole();
+            this.getFind();
         },
 
         methods:{
+            //      发现的首页数据
+            getFind(){
+                let data={};
+                let result = new Promise((resolve,reject) => {
+                    this.$http.post(url.FindIndex,data).then(res => {
+                        if(res.msg == 'success'){
+                            this.findList = res.data;
+                            //    失败的情况不弹出  要不要设置一下在请求一次
+                        }
+                    }).catch(error => {
+                        console.log("error info",error)
+                    })
+                })    
+            },
+
+            //      获取分享的页面
+
+
 
             //   跳转到详情页
-            fdetails(n){
+            fdetails(n,title){
                 this.$router.push({
-                    path:'/find/fdetails'
+                    // path:'/find/flist',
+                    name:'flist',
+                    params:{
+                        id:n,
+                        title:title
+                    }
                 })
                 //    this.$router.push({path:"/index/stable"});
             },
 
-            onClickRight(){
-                this.show = true
-            },
-
-            onClickLeft(){
-                this.$router.go(-1)
-            },
-
-            myconsole(){
-                alert(1)
-                console.log('myconsole  info',this.title)
-            }
         } 
     }
 </script>

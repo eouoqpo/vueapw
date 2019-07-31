@@ -32,7 +32,9 @@ import Forget from './views/User/Forget.vue';           //    找回密码
 
 
 //   发现的页面
-import Find from './views/Find/Find.vue';
+import Find from './views/Find/Find.vue';                //   发现首页
+import Flist from './views/Find/Flist.vue';              //   发现列表页
+import FDetail from './views/Find/FDetail.vue';          //   发现详情页
 
 //   分类的页面
 import Sort from './views/Sort/Sort.vue';
@@ -87,6 +89,14 @@ export default new Router({
       path: '/find',
       name: 'find',
       component: Find
+    },{
+      path:'/find/flist',
+      name:'flist',
+      component:Flist
+    },{
+      path:'/find/fdetail',
+      name:'fdetail',
+      component:FDetail
     },
 
     //   个人中心的路由

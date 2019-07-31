@@ -4,7 +4,7 @@ node_modules
 
 #    过滤 ip 文件
 /src/ip.js    
-
+# /src_no_data
 # local env files
 .env.local
 .env.*.local

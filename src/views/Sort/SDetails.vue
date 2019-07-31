@@ -45,7 +45,7 @@
         },
 
         mounted:function(){
-            ((this.$route.params && this.$route.params.id) || this.infoId != 0) ? (this.infoId = this.$route.params.id,this.getInfo()) : this.$router.push({name:'login'});
+            ((this.$route.query && this.$route.query.type) || this.infoId != 0) ? (this.infoId = this.$route.query.type,this.getInfo()) : this.$router.push({name:'login'});
         },
 
         methods:{
@@ -66,13 +66,12 @@
 
             getInfo(){
                 let data = {
-                    GoodsFlag2:this.infoId,
+                    GoodsFlag2:+this.infoId,
                     Page:1,        //
                     Limit:20, 
                 };
                 let result = new Promise((resolve,reject)=>{
                     this.$http.post(url.FGoodsList,data).then(res => {
-                        console.log("checked count whether is zero sDetails getInfo data",res.data.Count)
                         if(res.msg == 'success'){
                             this.infoList = res.data.List;
                         }

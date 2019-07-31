@@ -129,8 +129,8 @@
                 this.$router.push({
                     // path:"/sort/sdetails"
                     name:'sdetails',
-                    params:{
-                        id:n
+                    query:{
+                        type:n
                     }
                 });
             },

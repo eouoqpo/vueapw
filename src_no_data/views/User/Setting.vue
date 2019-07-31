@@ -4,7 +4,7 @@
         <div>
             <div class="item" flex="dir:left box:last cross:center" @click="changImg">
                 <span>头像</span>
-                <img src="../../assets/img/logoImg.png">
+                <img src="../../assets/img/amionlogo.png">
             </div>
             <div class="item" flex="dir:left box:last cross:center" @click="changNick">
                 <span>昵称</span>

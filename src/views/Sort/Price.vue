@@ -4,7 +4,7 @@
         <div class='lead' >
             <div class='cont1' flex="box:justify">
                 <div flex="dir:top">
-                    <img src='../../assets/img/logoImg.png'/>
+                    <img src='../../assets/img/amionlogo.png'/>
                     <h3>V0新手</h3>
                 </div>
                 <div flex="dir:top">
@@ -16,7 +16,7 @@
 
             <div class='cont1' flex="box:justify">
                 <div flex="dir:top">
-                    <img src='../../assets/img/logoImg.png'/>
+                    <img src='../../assets/img/amionlogo.png'/>
                     <h3>V0新手</h3>
                 </div>
                 <div flex="dir:top">
@@ -28,7 +28,7 @@
 
             <div class='cont1' flex="box:justify">
                 <div flex="dir:top">
-                    <img src='../../assets/img/logoImg.png'/>
+                    <img src='../../assets/img/amionlogo.png'/>
                     <h3>V0新手</h3>
                 </div>
                 <div flex="dir:top">
@@ -40,7 +40,7 @@
 
             <div class='cont1' flex="box:justify">
                 <div flex="dir:top">
-                    <img src='../../assets/img/logoImg.png'/>
+                    <img src='../../assets/img/amionlogo.png'/>
                     <h3>V0新手</h3>
                 </div>
                 <div flex="dir:top">
@@ -52,7 +52,7 @@
 
             <div class='cont1' flex="box:justify">
                 <div flex="dir:top">
-                    <img src='../../assets/img/logoImg.png'/>
+                    <img src='../../assets/img/amionlogo.png'/>
                     <h3>V0新手</h3>
                 </div>
                 <div flex="dir:top">
@@ -64,7 +64,7 @@
 
             <div class='cont1' flex="box:justify">
                 <div flex="dir:top">
-                    <img src='../../assets/img/logoImg.png'/>
+                    <img src='../../assets/img/amionlogo.png'/>
                     <h3>V0新手</h3>
                 </div>
                 <div flex="dir:top">
@@ -76,7 +76,7 @@
 
             <div class='cont1' flex="box:justify">
                 <div flex="dir:top">
-                    <img src='../../assets/img/logoImg.png'/>
+                    <img src='../../assets/img/amionlogo.png'/>
                     <h3>V0新手</h3>
                 </div>
                 <div flex="dir:top">
@@ -88,7 +88,7 @@
 
             <div class='cont1' flex="box:justify">
                 <div flex="dir:top">
-                    <img src='../../assets/img/logoImg.png'/>
+                    <img src='../../assets/img/amionlogo.png'/>
                     <h3>V0新手</h3>
                 </div>
                 <div flex="dir:top">
@@ -100,7 +100,7 @@
 
             <div class='cont1' flex="box:justify">
                 <div flex="dir:top">
-                    <img src='../../assets/img/logoImg.png'/>
+                    <img src='../../assets/img/amionlogo.png'/>
                     <h3>V0新手</h3>
                 </div>
                 <div flex="dir:top">
@@ -112,7 +112,7 @@
 
             <div class='cont1' flex="box:justify">
                 <div flex="dir:top">
-                    <img src='../../assets/img/logoImg.png'/>
+                    <img src='../../assets/img/amionlogo.png'/>
                     <h3>V0新手</h3>
                 </div>
                 <div flex="dir:top">
@@ -124,7 +124,7 @@
 
             <div class='cont1' flex="box:justify">
                 <div flex="dir:top">
-                    <img src='../../assets/img/logoImg.png'/>
+                    <img src='../../assets/img/amionlogo.png'/>
                     <h3>V0新手</h3>
                 </div>
                 <div flex="dir:top">
@@ -136,7 +136,7 @@
 
             <div class='cont1' flex="box:justify">
                 <div flex="dir:top">
-                    <img src='../../assets/img/logoImg.png'/>
+                    <img src='../../assets/img/amionlogo.png'/>
                     <h3>V0新手</h3>
                 </div>
                 <div flex="dir:top">
