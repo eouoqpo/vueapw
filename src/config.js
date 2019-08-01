@@ -10,23 +10,19 @@ export const ErrorSidTimeOut = 4;
 // 模板
 // export const DImg = host + "/api/app/user/codeimg";    //    获取图片验证码
 
-
 //     首页数据       /api/app/public/goodstypelist
 export const IindexData = host + "/api/app/public/home";          //   首页信息banner  分类接口   推荐中  未开始  已结束 等
 export const GoodsList = host + "/api/app/public/goodstypelist";      //商品列表
 export const Detail = host + "/api/app/news/news";                    //  首页的banner跳转
 
-
 //    登录注册相关
 export const imgcode = host + "/api/app/user/codeimg";    //    获取图片验证码
 export const Phonecode = host + "/api/app/user/codephone";   //   通过手机号发送验证码
-
 export const Codephone = host + "/api/app/oluser/codephone";   //  通过账号向手机发送验证码
 export const Register = host + "/api/app/user/register";    //    注册
 export const Login = host + "/api/app/user/login";    //    登录
 export const Resetpwd = host + "/api/app/user/reset/pwd";        //   重置密码       1-登录密码    2-支付密码
  
-
 //    用户个人中心
 export const Modifypwd = host + "/api/app/oluser/change/pwd";    //   修改密码   1-登录密码    2-支付密码
 export const Logout = host + "/api/app/oluser/logout";    //   退出登录
@@ -74,7 +70,6 @@ export const FindIndex = host + "/api/app/oluser/typelist";        //   咨询�
 export const FsDetail = host + "/api/app/news/news";             //     发现的详情页
 export const FindShare = host + "/api/app/user/wx";              //     发现里面的分享
 
-
 //      分类专场
 export const FiledList = host + "/api/app/public/goodstypelist";         //     商场的分类   一级分类
 export const FGoodsList = host + "/api/app/public/goodslist";            //     商品列表
@@ -82,7 +77,8 @@ export const GoodsInfo = host + "/api/app/public/show";                  //     
 export const addCol = host + "/api/app/collection/addcollection";        //     添加收藏
 export const delCol = host + "/api/app/collection/delcollection";        //     删除收藏
 export const colList = host + "/api/app/collection/collectionlist";      //     收藏列表
-export const offerList = host + "/api/app/offer/offerlist";              //     出价列表
+export const offerList = host + "/api/app/offer/offerlist";              //     出价列表   以前的
+export const publicList = host + "/api/app/public/offerlist";            //     用户出价拍卖   不需要登录的情况
 export const offerAdd = host + "/api/app/offer/add";                     //     用户出价
 export const YiKouJia = host + "/api/app/order/yikoujia";                //     一口价
 export const WheCollect = host + '/api/app/collection/collection';       //     商品是否收藏

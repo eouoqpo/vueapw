@@ -29,7 +29,6 @@
                 if(this.saleType != '已结束 '){
                     this.count();
                 }else{
-                    this.$emit('myspot',1)
                     clearInterval(this.timer);
                 }
             }, 1000);
