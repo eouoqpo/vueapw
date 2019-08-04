@@ -88,7 +88,7 @@
                 text-align: center;
                 margin:.0rem auto;
                 border-radius: .2rem;
-                background-color:#ff1933;
+                background-color:#05a0e5;
                 border:.02rem solid #f0f0f0;
             }
         }
@@ -133,7 +133,7 @@
         },
 
         methods:{
-
+            //     获取商品详情页
             getList(){
                 let data = {
                     "Id":+this.goodId
@@ -198,6 +198,45 @@
                     num < this.stockNum ? this.num = num + 1 : this.$alert('温馨提示', '商品的数量超过了最大值 ！');
                 }
             },
+
+            //   用户出价拍卖   this.state.mystatus==1
+            offer(){
+                let data = {
+                    Id:this.state.item.Id,
+                    Num:this.state.num	
+                };
+                let result = request(url.YiKouJia,data);
+                result.then(value => {
+                    //console.log("user offer buy goods value",value);
+                    if(value){
+                        alert("温馨提示", "您已出价成功！", [
+                            {
+                                text: "取消",
+                                onPress: () => {
+                                },
+                                style: {
+                                    fontWeight: "bold"
+                                }                       
+                            },
+                            {
+                                text: "去付款",
+                                onPress: () => {
+                                    this.props.dispatch(routerRedux.push({
+                                        pathname:"/user/pay/",
+                                        state:{
+                                            id:value
+                                        }
+                                    }))
+                                },
+                                style: {
+                                    fontWeight: "bold"
+                                }
+                            }
+                        ]);
+                    };
+                });
+            },
+
             purchase(){
                 // this.$alert('温馨提示', '商品的数量最低为 1 ！');
                 this.$confirm('是否确定购买', '温馨提示', {
@@ -212,21 +251,9 @@
                 });
             },
 
-            onChangeType(n){
-                this.type = n;
-            },
-
-            onClickLeft(){
-                this.$router.go(-1)
-            },
-
             goBack(){
                 this.$router.go(-1);
             },
-
-            goDetail(n){
-                // this.$router.push()
-            }
         } 
     }
 </script>

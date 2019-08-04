@@ -114,7 +114,7 @@
                                 height: .7rem;
                                 color:#fff;
                                 border-radius: .7rem;
-                                background-color:#ff1933;
+                                background-color:#05a0e5;
                                 padding:.0rem .5rem;
                             }
                             button:nth-child(1){

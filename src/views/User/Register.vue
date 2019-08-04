@@ -63,7 +63,7 @@
                 width:9rem;
                 margin:2.1rem auto .0rem;
                 text-align: center;
-                background-color:#ff1933;
+                background-color:#05a0e5;
             }
             //    注册协议的样式
             .confirm{
@@ -77,12 +77,12 @@
                     background-size: 0.5rem 0.5rem;
                 }
                 .theme{
-                    color:#ff1933;
+                    color:#05a0e5;
                     background:url("../../assets/img/myselect_on.png") 0.35rem center no-repeat;
                     background-size: 0.45rem 0.45rem;
                 }
                 i{
-                    color:#ff1933;
+                    color:#05a0e5;
                 }
                 p{
                     color:#666;
@@ -99,7 +99,7 @@
                 padding:.0rem .0rem .0rem .75rem;
                 border-bottom: .02rem solid #ccc;
                 span{
-                    color:#ff1933
+                    color:#05a0e5
                 }
                 input{
                     height: 100%;
@@ -142,7 +142,7 @@
                 p{
                     width:8rem;
                     margin:.7rem auto;
-                    color:#ff1933;
+                    color:#05a0e5;
                     text-align: center;
                     height: 1rem;
                     line-height: 1rem;

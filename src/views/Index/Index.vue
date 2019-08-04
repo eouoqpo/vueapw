@@ -77,11 +77,11 @@
                         border-radius: 50%;
                     }
                     span{
-                        padding-top:.06rem;
+                        padding-top:.16rem;
                         text-align: center;
                     }
                     .theme{
-                        color:#ff1933;
+                        color:#ff1933;   //  05a0e5
                     }
                 }
             }
@@ -97,7 +97,7 @@
                     height: .6rem;
                     line-height: .6rem;
                     color:#fff;
-                    background-color:#ff1933;
+                    background-color:#05a0e5;
                 }
                 .span{
                     color:#333;
@@ -203,7 +203,7 @@
                     GoodsFlag1: +this.stypeNum,  //一级分类   +(this.state.tempSort)
                     GoodsType: +this.addNum,      //1 2 3 加价 减价 一口价
                     Page:page,        //
-                    Limit:10,       //
+                    Limit:20,       //
                 };
                 console.log("   getSecond    data   info",data);
                 let result = new Promise((resolve,reject) => {

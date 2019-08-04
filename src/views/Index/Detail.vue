@@ -149,7 +149,7 @@
             position: fixed;
             text-align: center;
             border-top:.02rem solid #ddd;
-            background-color:#ff1933;
+            background-color:#05a0e5;
         }
         .offer{
             background-color: #f0f0f0;
@@ -163,6 +163,7 @@
     import * as url from '../../config.js';
     import Maps from '../../utils/tool.js';
     import CountDown from '../../components/CountDown.vue';
+import { COPYFILE_EXCL } from 'constants';
     export default {
         name: 'detail',
         data() {
@@ -312,6 +313,7 @@
                     Page:1,
                     Limit:500
                 }
+                console.log(" offerList info list detail  获取出价记录",data);
                 let result = new Promise((resolve,reject) => {
                     this.$http.post(url.publicList,data).then(res => {
                         if(res.msg == 'success'){

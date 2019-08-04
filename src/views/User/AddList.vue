@@ -72,7 +72,7 @@
                 margin:1.2rem auto 0rem;
                 line-height: 1.2rem;
                 border-radius: .6rem;
-                background-color:#ff1933;
+                background-color:#05a0e5;
             }
         }
     }

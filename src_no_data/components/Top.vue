@@ -13,7 +13,7 @@
         top:0px;
         height: 1.28rem;
         padding:0rem 0.5rem 0rem 0.36rem;
-        background-color:#ff1933;
+        background-color:#05a0e5;
         font-size:.38rem;
         color:#fff;
         text-align: center;

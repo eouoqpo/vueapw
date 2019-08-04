@@ -58,13 +58,13 @@
                     height: 1.2rem;
                     line-height: 1.2rem;
                     border-radius: .3rem;
-                    background-color:#ff1933;
+                    background-color:#05a0e5;
                 }
                 li{
                     margin-top:.4rem;
                     padding:.0rem .2rem;
                     b{
-                        color:#ff1933;
+                        color:#05a0e5;
                         padding-right:.65rem;
                         background:url('../../assets/img/loginnext.png') right center no-repeat;
                         background-size:.5rem .5rem;

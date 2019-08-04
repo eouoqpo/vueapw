@@ -4,12 +4,12 @@
         <div>
             <div v-for='(info,key) in findList' :key='info.Id' class='item' flex="dir:left box:last cross:center" @click="fdetails(info.Id,'发现列表')">
                 <span :class="'span'+(key+1)">{{info.Title}}</span>
-                <p class ='fff'><mu-badge :content="''+info.Unread" circle color="#ff1933"/></p>                            
+                <p class ='fff'><mu-badge :content="''+info.Unread" circle color="#05a0e5"/></p>                            
             </div>
 
             <div class='item' flex="dir:left box:last cross:center" @click="fdetails(0,'分享列表')">
                 <span class="span3">分享</span>
-                <p class ='fff'><mu-badge content="0" circle color="#ff1933"/></p>                            
+                <p class ='fff'><mu-badge content="0" circle color="#05a0e5"/></p>                            
             </div>
         </div>
         <Bottom :title="'find'"/>

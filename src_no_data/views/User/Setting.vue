@@ -47,7 +47,7 @@
                 display: block;
                 height: 1.2rem;
                 line-height:1.2rem;
-                background-color:#ff1933;
+                background-color:#05a0e5;
             }
         }
         .item{

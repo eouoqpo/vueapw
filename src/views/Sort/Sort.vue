@@ -32,7 +32,7 @@
                     border-bottom: .02rem solid #f0f0f0;
                 }
                 .active{
-                    color:#ff1933;
+                    color:#05a0e5;
                     border-right:none;
                 }
             }

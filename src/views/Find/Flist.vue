@@ -47,7 +47,7 @@
                 font-weight: 600;
                 width: 6rem;
                 font-size: 0.34rem;
-                color: #ff1933;
+                color: #05a0e5;
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow:ellipsis;    

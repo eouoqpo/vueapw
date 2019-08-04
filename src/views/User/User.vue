@@ -129,7 +129,7 @@
         .headerCont{
             color:#fff;
             padding:.7rem .5rem .3rem;
-            background-color:#ff1933;
+            background-color:#05a0e5;
             div{
                 .portrait{
                     width:1.5rem;

@@ -43,7 +43,7 @@
                 width:9rem;
                 margin:2.1rem auto .0rem;
                 text-align: center;
-                background-color:#ff1933;
+                background-color:#05a0e5;
             }
             div{
                 height: 1.2rem;
@@ -57,7 +57,7 @@
                     margin-right: .1rem;
                 }
                 span{
-                    color:#ff1933;
+                    color:#05a0e5;
                 }
             }
             div:nth-child(1){

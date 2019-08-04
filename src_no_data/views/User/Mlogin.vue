@@ -40,7 +40,7 @@
             line-height: 1rem;
             text-align: center;
             border-radius: .6rem;
-            background-color:#ff1933;
+            background-color:#05a0e5;
         }
     }
 </style>

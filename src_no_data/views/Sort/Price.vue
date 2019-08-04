@@ -195,7 +195,7 @@
                     // backward.png
                     background:url('../../assets/img/header.png') 1.5rem .0rem no-repeat;
                     background-size:.8rem .8rem;
-                    color:#ff1933;
+                    color:#05a0e5;
                 }
             }
         }

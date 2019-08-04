@@ -81,7 +81,7 @@
                 color:#666;
                 text-align: center;
                 span{
-                    color:#ff1933;
+                    color:#05a0e5;
                     font-weight: 700;   
                 }
                 p{

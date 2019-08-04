@@ -39,7 +39,7 @@
             }
         }
         .theme{
-          color:#ff1933;
+          color:#05a0e5;
 
         }
     }

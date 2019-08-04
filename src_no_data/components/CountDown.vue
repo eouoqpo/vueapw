@@ -4,7 +4,7 @@
 
 <style lang="scss" scoped>
     .theme{
-        color:#ff1933;
+        color:#05a0e5;
     }
 </style>
 

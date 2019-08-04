@@ -81,7 +81,7 @@
                         text-align: center;
                     }
                     .theme{
-                        color:#ff1933;
+                        color:#05a0e5;
                     }
                 }
             }
@@ -97,7 +97,7 @@
                     height: .6rem;
                     line-height: .6rem;
                     color:#fff;
-                    background-color:#ff1933;
+                    background-color:#05a0e5;
                 }
                 .span{
                     color:#333;

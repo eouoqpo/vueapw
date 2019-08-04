@@ -6,25 +6,25 @@
                 <span class="span1">
                     sdfsd你是谁
                 </span>
-                <p class ='fff'><mu-badge content="3" circle color="#ff1933"/></p>                            
+                <p class ='fff'><mu-badge content="3" circle color="#05a0e5"/></p>                            
             </div>
             <div class='item' flex="dir:left box:last cross:center" @click="fdetails(n)">
                 <span class="span2">
                     sdfsd你是谁
                 </span>
-                <p class ='fff'><mu-badge content="3" circle color="#ff1933"/></p>                            
+                <p class ='fff'><mu-badge content="3" circle color="#05a0e5"/></p>                            
             </div>
             <div class='item' flex="dir:left box:last cross:center" @click="fdetails(n)">
                 <span class="span1">
                     sdfsd你是谁
                 </span>
-                <p class ='fff'><mu-badge content="3" circle color="#ff1933"/></p>                            
+                <p class ='fff'><mu-badge content="3" circle color="#05a0e5"/></p>                            
             </div>
             <div class='item' flex="dir:left box:last cross:center" @click="fdetails(n)">
                 <span class="span3">
                     sdfsd你是谁
                 </span>
-                <p class ='fff'><mu-badge content="3" circle color="#ff1933"/></p>                            
+                <p class ='fff'><mu-badge content="3" circle color="#05a0e5"/></p>                            
             </div>
         </div>
         <Bottom :title="'find'"/>

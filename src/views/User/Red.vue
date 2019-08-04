@@ -71,7 +71,7 @@
                 margin: .35rem auto;
                 //    本来是在 left 里面 提出来避免权重过高
                 h4{
-                    color:#ff1933;
+                    color:#05a0e5;
                     line-height: 1.2rem;
                     font-size: .65rem;
                     text-align: center;
@@ -102,7 +102,7 @@
                         }
                         margin-top:.3rem;
                         height: 1.2rem;
-                        color:#ff1933;
+                        color:#05a0e5;
                         span{
                             font-size: .46rem;
                             margin-right:.6rem;                   
@@ -112,7 +112,7 @@
                             height: .7rem;
                             line-height: .7rem;
                             border-radius: .2rem;
-                            background-color:#ff1933;
+                            background-color:#05a0e5;
                             font-size: .4rem;
                             padding:.0rem .3rem;
                         }

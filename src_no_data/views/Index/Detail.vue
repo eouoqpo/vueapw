@@ -159,7 +159,7 @@
             font-size: .38rem;
             position: fixed;
             text-align: center;
-            background-color:#ff1933;
+            background-color:#05a0e5;
         }
     }
 </style>

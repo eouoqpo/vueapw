@@ -137,7 +137,7 @@
                 text-align: center;
                 margin:.0rem auto;
                 border-radius: .2rem;
-                background-color:#ff1933;
+                background-color:#05a0e5;
                 border:.02rem solid #f0f0f0;
             }
         }
