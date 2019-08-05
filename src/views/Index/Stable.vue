@@ -207,7 +207,6 @@
                 };
                 let result = request(url.YiKouJia,data);
                 result.then(value => {
-                    //console.log("user offer buy goods value",value);
                     if(value){
                         alert("温馨提示", "您已出价成功！", [
                             {
